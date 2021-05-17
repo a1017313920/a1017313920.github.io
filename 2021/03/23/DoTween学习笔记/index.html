@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="系统地学习了一下DOTween插件这里做了一个整理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DoTween学习笔记">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2021&#x2F;03&#x2F;23&#x2F;DoTween%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0&#x2F;index.html">
+<meta property="og:site_name" content="hhk&#39;s Blog">
+<meta property="og:description" content="系统地学习了一下DOTween插件这里做了一个整理">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;hu_hao_kai&#x2F;blog-image&#x2F;raw&#x2F;master&#x2F;img&#x2F;image-20210323174008712.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;hu_hao_kai&#x2F;blog-image&#x2F;raw&#x2F;master&#x2F;img&#x2F;image-20210323190421550.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;hu_hao_kai&#x2F;blog-image&#x2F;raw&#x2F;master&#x2F;img&#x2F;image-20210323191327308.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;hu_hao_kai&#x2F;blog-image&#x2F;raw&#x2F;master&#x2F;img&#x2F;image-20210323193444558.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;hu_hao_kai&#x2F;blog-image&#x2F;raw&#x2F;master&#x2F;img&#x2F;image-20210323201123080.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;hu_hao_kai&#x2F;blog-image&#x2F;raw&#x2F;master&#x2F;img&#x2F;image-20210323201729499.png">
+<meta property="og:updated_time" content="2021-03-30T12:16:09.856Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;hu_hao_kai&#x2F;blog-image&#x2F;raw&#x2F;master&#x2F;img&#x2F;image-20210323174008712.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/03/23/DoTween学习笔记/"/>
+
+
+
+
+
+  <title>DoTween学习笔记 | hhk's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+<script src="/live2d-widget/autoload.js"></script>
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">hhk's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            Schedule
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" target="_blank" rel="noopener" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/23/DoTween%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hhk">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hhk's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">DoTween学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-03-23T20:56:05+08:00">
+                2021-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>系统地学习了一下DOTween插件这里做了一个整理</p>
+<a id="more"></a>
+
+<p>在使用DoTween需要引入库 <font color="red"> using DG.Tweening</font></p>
+<h2 id="一、Transform"><a href="#一、Transform" class="headerlink" title="一、Transform"></a>一、Transform</h2><h3 id="1-Position"><a href="#1-Position" class="headerlink" title="1)Position"></a>1)Position</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//从该点移动到Position (1,1,1),时间为2秒钟(世界坐标)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(Vector3.one,<span class="number">2f</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//从该点移动到X/Y/Z的坐标为2的点，时间为2秒钟</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">transform.DOMoveX(<span class="number">2</span>,<span class="number">2f</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">transform.DOMoveY(<span class="number">2</span>,<span class="number">2f</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">transform.DOMoveZ(<span class="number">2</span>,<span class="number">2f</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//从该点移动到Position (1,1,1),时间为2秒钟(自身坐标)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">transform.DOLocalMove(Vector3.one,<span class="number">2f</span>);</span></pre></td></tr></table></figure>
+
+<h3 id="2-Rotation"><a href="#2-Rotation" class="headerlink" title="2)Rotation"></a>2)Rotation</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//从该点旋转到Rotation (50,50,50),时间为2f，改变的是欧拉角(世界坐标)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">transform.DORotate(<span class="keyword">new</span> Vector3(<span class="number">50</span>,<span class="number">50</span>,<span class="number">50</span>),<span class="number">2f</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//四元数旋转，时间为2f</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">transform.DORotateQuaternion(<span class="keyword">new</span> Quaternion(<span class="number">0.1f</span>,<span class="number">0.1f</span>,<span class="number">0.1f</span>,<span class="number">0.1f</span>),<span class="number">2</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//从该点旋转到Rotation (50,50,50),时间为2f，改变的是欧拉角(自身坐标)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">transform.DOLocalRotate(<span class="keyword">new</span> Vector3(<span class="number">50</span>, <span class="number">50</span>, <span class="number">50</span>), <span class="number">2f</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//四元数旋转，时间为2f(自身坐标)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">transform.DOLocalRotateQuaternion(<span class="keyword">new</span> Quaternion(<span class="number">0.1f</span>, <span class="number">0.1f</span>, <span class="number">0.1f</span>, <span class="number">0.1f</span>), <span class="number">2f</span>);</span></pre></td></tr></table></figure>
+
+<h3 id="3）Scale"><a href="#3）Scale" class="headerlink" title="3）Scale"></a>3）Scale</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//从该点缩放到Scale (2,2,2)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">transform.DOScale(<span class="keyword">new</span> Vector3(<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>), <span class="number">2f</span>);</span></pre></td></tr></table></figure>
+
+<h3 id="4-Punch"><a href="#4-Punch" class="headerlink" title="4)Punch"></a>4)Punch</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一个参数 punch：表示方向及强度</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//第二个参数 duration：表示动画持续时间</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//第三个参数 vibrato：震动次数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//第四个参数 elascity: 这个值是0到1的</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">         <span class="comment">//当为0时，就是在起始点到目标点之间运动</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">         <span class="comment">//不为0时，会把你赋的值乘上一个参数，作为你运动方向反方向的点，物体在这个点和目标点之间运动</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">transform.DOPunchPosition(<span class="keyword">new</span> Vector3(<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>), <span class="number">3</span>, <span class="number">5</span>, <span class="number">1f</span>);</span></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/hu_hao_kai/blog-image/raw/master/img/image-20210323174008712.png" alt="image-20210323174008712"></p>
+<h3 id="5-shake"><a href="#5-shake" class="headerlink" title="5)shake"></a>5)shake</h3><p>摄像机的振动也是如此</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//参数：持续时间，力量，震动，随机性，淡出</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//力量：实际就是震动的幅度,可以理解成相机施加的力的大小 使用Vector3可以选择每个轴向不同的强度</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//震动：震动次数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//随机性：改变震动方向的随机值（大小：0~180）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//淡出：就是运动最后是否缓慢移动回到原本位置</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">transform.DOShakePosition(<span class="number">1</span>, <span class="number">0.5f</span>, <span class="number">10</span>, <span class="number">90</span>，<span class="literal">true</span>);</span></pre></td></tr></table></figure>
+
+<h3 id="6-Blend"><a href="#6-Blend" class="headerlink" title="6)Blend"></a>6)Blend</h3><p>将动作合并</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//最终直接移动到(-2,-2,-2)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(<span class="keyword">new</span> Vector3(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>), <span class="number">2f</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(<span class="keyword">new</span> Vector3(<span class="number">-2</span>, <span class="number">-2</span>, <span class="number">-2</span>), <span class="number">2f</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//最终直接移动到(-1,-1,-1)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">transform.DOBlendableMoveBy(<span class="keyword">new</span> Vector3(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>), <span class="number">2f</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">transform.DOBlendableMoveBy(<span class="keyword">new</span> Vector3(<span class="number">-2</span>, <span class="number">-2</span>, <span class="number">-2</span>), <span class="number">2f</span>);</span></pre></td></tr></table></figure>
+
+<h2 id="二、Material"><a href="#二、Material" class="headerlink" title="二、Material"></a>二、Material</h2><h3 id="1-改变材质颜色"><a href="#1-改变材质颜色" class="headerlink" title="1)改变材质颜色"></a>1)改变材质颜色</h3><p>当Cube的Material的shader选择的是standard时</p>
+<p>将材质的颜色变为红色，时间为2秒</p>
+<p>mat1.DOColor(Color.red,<font color="red">“需要改变的颜色名称”</font>, 2f);</p>
+<p>例：mat1.DOColor(Color.red,”_Color”, 2f);</p>
+<p>当中间为_Color是默认的可省略</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Material mat1 = GetComponent&lt;MeshRenderer&gt;().material;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">mat1.DOColor(Color.red, <span class="number">2f</span>);</span></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/hu_hao_kai/blog-image/raw/master/img/image-20210323190421550.png" alt="image-20210323190421550"></p>
+<p>但是一旦将当Cube的Material的shader选择的是standard是Additive或者其他没有_Color标志的shader便不会触发</p>
+<p>需要注明需要改变的颜色名称</p>
+<p>例： mat1.DOColor(Color.red,”_TintColor”, 2f);</p>
+<p><img src="https://gitee.com/hu_hao_kai/blog-image/raw/master/img/image-20210323191327308.png" alt="image-20210323191327308"></p>
+<h3 id="2-改变材质透明度"><a href="#2-改变材质透明度" class="headerlink" title="2)改变材质透明度"></a>2)改变材质透明度</h3><p>第一种</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">mat1.DOColor(Color.clear, <span class="string">"_TintColor"</span>, <span class="number">2f</span>);</span></pre></td></tr></table></figure>
+
+<p>第二种</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//参数：透明度，需要改变的颜色，时间</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">mat1.DOFade(<span class="number">0</span>, <span class="string">"_TintColor"</span>, <span class="number">2f</span>);</span></pre></td></tr></table></figure>
+
+<h3 id="3-设置材质渐变动画"><a href="#3-设置材质渐变动画" class="headerlink" title="3)设置材质渐变动画"></a>3)设置材质渐变动画</h3><p>设置一个公开的变量在unity客户端中编辑颜色</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Gradient gradient;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">mat1.DOGradientColor(gradient, <span class="string">"_TintColor"</span>, <span class="number">2f</span>);</span></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/hu_hao_kai/blog-image/raw/master/img/image-20210323193444558.png" alt="image-20210323193444558"></p>
+<h3 id="4-Offset"><a href="#4-Offset" class="headerlink" title="4)Offset"></a>4)Offset</h3><p>设置偏移量</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">mat1.DOOffset(<span class="keyword">new</span> Vector2(<span class="number">1</span>,<span class="number">1</span>),<span class="number">2f</span>);</span></pre></td></tr></table></figure>
+
+<h3 id="5-Vector和混合颜色的使用"><a href="#5-Vector和混合颜色的使用" class="headerlink" title="5)Vector和混合颜色的使用"></a>5)Vector和混合颜色的使用</h3><p> 使用DOVector的Color.clear的RGBA为(0,0,0,0)将颜色在两秒后变为透明</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">mat1.DOVector(Color.clear, <span class="string">"_TintColor"</span>, <span class="number">2f</span>);</span></pre></td></tr></table></figure>
+
+<p>DOTween会忽略掉所有DOColor而去执行最后一个DOColor</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">mat1.DOColor(Color.red, <span class="string">"_TintColor"</span>, <span class="number">2f</span>);          <span class="comment">//不执行</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">mat1.DOColor(Color.green, <span class="string">"_TintColor"</span>, <span class="number">2f</span>);        <span class="comment">//执行</span></span></pre></td></tr></table></figure>
+
+<p>red + green = yello</p>
+<p>DOBlendableColor会将所有颜色相加后最终直接输出</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">mat1.DOBlendableColor(Color.red, <span class="string">"_TintColor"</span>, <span class="number">2f</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">mat1.DOBlendableColor(Color.green, <span class="string">"_TintColor"</span>, <span class="number">2f</span>);    <span class="comment">//最终颜色输出为黄色</span></span></pre></td></tr></table></figure>
+
+<h2 id="三、Camera"><a href="#三、Camera" class="headerlink" title="三、Camera"></a>三、Camera</h2><h3 id="1-设置相机宽高比、背景色、远近景控制"><a href="#1-设置相机宽高比、背景色、远近景控制" class="headerlink" title="1)设置相机宽高比、背景色、远近景控制"></a>1)设置相机宽高比、背景色、远近景控制</h3><h4 id="相机宽高比"><a href="#相机宽高比" class="headerlink" title="相机宽高比"></a>相机宽高比</h4><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Camera camera;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>    &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        camera = GetComponent&lt;Camera&gt;();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//参数：比例，持续时间</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        camera.DOAspect(<span class="number">16</span>/<span class="number">9f</span>, <span class="number">2f</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr></table></figure>
+
+<h4 id="背景色"><a href="#背景色" class="headerlink" title="背景色"></a>背景色</h4><p>首先将Camera的Clear Flags从skybox设置为Solid Color</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//相机背景颜色由蓝色变为红色，持续两秒</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">camera.DOColor(Color.red, <span class="number">2f</span>);</span></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/hu_hao_kai/blog-image/raw/master/img/image-20210323201123080.png" alt="image-20210323201123080"></p>
+<h4 id="远近景控制"><a href="#远近景控制" class="headerlink" title="远近景控制"></a>远近景控制</h4><p>通过改变Cliping OLanes的Near和Far来控制远近切面</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">camera.DONearClipPlane(<span class="number">1.4f</span>, <span class="number">2f</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">camera.DOFarClipPlane(<span class="number">50</span>, <span class="number">2f</span>);</span></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/hu_hao_kai/blog-image/raw/master/img/image-20210323201729499.png" alt="image-20210323201729499"></p>
+<h3 id="2-摄像机视域的控制"><a href="#2-摄像机视域的控制" class="headerlink" title="2)摄像机视域的控制"></a>2)摄像机视域的控制</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//Perspective模式下将视域扩大到100</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">camera.DOFieldOfView(<span class="number">100</span>, <span class="number">2f</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//OrthoSize模式下将视域扩大</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">camera.DOOrthoSize模式下将视域扩大(<span class="number">6</span>, <span class="number">2f</span>);</span></pre></td></tr></table></figure>
+
+<h3 id="3-分屏显示"><a href="#3-分屏显示" class="headerlink" title="3)分屏显示"></a>3)分屏显示</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据比列显示位置</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">camera.DORect(<span class="keyword">new</span> Rect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0.5f</span>, <span class="number">0.5f</span>),<span class="number">2f</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据数值显示位置</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">camera.DOPixelRect(<span class="keyword">new</span> Rect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">400</span>, <span class="number">200</span>), <span class="number">2f</span>);</span></pre></td></tr></table></figure>
+
+<h2 id="四、Text"><a href="#四、Text" class="headerlink" title="四、Text"></a>四、Text</h2><h3 id="1）打字机效果"><a href="#1）打字机效果" class="headerlink" title="1）打字机效果"></a>1）打字机效果</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//速度不均匀</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">text.DOText(<span class="string">"gfdgsdfgdsfgsdgsrgfdsgzrgstgsrfestfrsGFsegsfsdfes"</span>, <span class="number">5f</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//速度均匀</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">text.DOText(<span class="string">"gfdgsdfgdsfgsdgsrgfdsgzrgstgsrfestfrsGFsegsfsdfes"</span>, <span class="number">5f</span>).SetEase(Ease.Linear);</span></pre></td></tr></table></figure>
+
+<h2 id="五、运动序列"><a href="#五、运动序列" class="headerlink" title="五、运动序列"></a>五、运动序列</h2><h3 id="1）Append"><a href="#1）Append" class="headerlink" title="1）Append"></a>1）Append</h3><p>实现效果为：该物体由当前坐标运动到(1,1,1)停顿2秒后运动到(2,0,0)</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义一个队列</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">Sequence sequence = DOTween.Sequence();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//追加运动到(1,1,1)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">sequence.Append(transform.DOMove(Vector3.one,<span class="number">2f</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//停止2秒</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">sequence.AppendInterval(<span class="number">2f</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//追加运动到(2,0,0)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">sequence.Append(transform.DOMove(<span class="keyword">new</span> Vector3(<span class="number">2</span>,<span class="number">0</span>,<span class="number">0</span>),<span class="number">2f</span>));</span></pre></td></tr></table></figure>
+
+<h3 id="2-Insert"><a href="#2-Insert" class="headerlink" title="2)Insert"></a>2)Insert</h3><p>Sequence.Insert(插入的时间的秒数,运动)；</p>
+<p>若插入时间小于原本运动总时长，则插入不会改变运动的总时长</p>
+<p>若插入时间大于原本运动总时长，则运动的总时长为插入时的时长</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Sequence sequence = DOTween.Sequence();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sequence.Append(transform.DOMove(Vector3.one,<span class="number">2f</span>));              <span class="comment">//0-2</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">sequence.AppendInterval(<span class="number">2f</span>);                                    <span class="comment">//2-4</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">sequence.Append(transform.DOMove(<span class="keyword">new</span> Vector3(<span class="number">2</span>,<span class="number">0</span>,<span class="number">0</span>),<span class="number">2f</span>));       <span class="comment">//4-6</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//在第0秒处插入动画播放2秒，会直接替换前面0-2秒的动画</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">sequence.Insert(<span class="number">0</span>,transform.DOMove(-Vector3.one, <span class="number">2f</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//在第0秒处插入动画播放2秒，会直接替换前面0-1秒的动画，在1秒时迅速变为替换前动画运动到1秒时的位置，再进行运动到结束</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">sequence.Insert(<span class="number">0</span>,transform.DOMove(-Vector3.one, <span class="number">1f</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//在前面所有运动完之后，过2s开始执行</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">sequence.Insert(<span class="number">0</span>,transform.DOMove(-Vector3.one, <span class="number">8f</span>));</span></pre></td></tr></table></figure>
+
+<h3 id="3）Join"><a href="#3）Join" class="headerlink" title="3）Join"></a>3）Join</h3><p>如果想实现物体变缩放边运动到某个点，然后再边缩放边运动到某个点，可使用两种方法</p>
+<p>1.使用Insert实现</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Sequence sequence = DOTween.Sequence();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sequence.Append(transform.DOMove(Vector3.one,<span class="number">2f</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">sequence.AppendInterval(<span class="number">2f</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">sequence.Append(transform.DOMove(<span class="keyword">new</span> Vector3(<span class="number">2</span>,<span class="number">0</span>,<span class="number">0</span>),<span class="number">2f</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">sequence.Insert(<span class="number">0</span>,transform.DOScale(<span class="keyword">new</span> Vector3(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>),<span class="number">2f</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">sequence.Insert(<span class="number">4</span>,transform.DOScale(Vector3.one,<span class="number">2f</span>));</span></pre></td></tr></table></figure>
+
+<p>2、使用Join实现</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Sequence sequence = DOTween.Sequence();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sequence.Append(transform.DOMove(Vector3.one,<span class="number">2f</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">sequence.Join(transform.DOScale(<span class="keyword">new</span> Vector3(<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>), <span class="number">2f</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">sequence.AppendInterval(<span class="number">2f</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">sequence.Append(transform.DOMove(<span class="keyword">new</span> Vector3(<span class="number">2</span>,<span class="number">0</span>,<span class="number">0</span>),<span class="number">2f</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">sequence.Join(transform.DOScale(Vector3.one, <span class="number">2f</span>));</span></pre></td></tr></table></figure>
+
+<h3 id="4-预添加"><a href="#4-预添加" class="headerlink" title="4)预添加"></a>4)预添加</h3><p>预添加会在最开始前先执行，以先进后出为规则</p>
+<p>这里会是先向(-1,-1,-1)移动之后等待2秒再做上面的运动</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Sequence sequence = DOTween.Sequence();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sequence.Append(transform.DOMove(Vector3.one,<span class="number">2f</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">sequence.Join(transform.DOScale(<span class="keyword">new</span> Vector3(<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>), <span class="number">2f</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">sequence.AppendInterval(<span class="number">2f</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">sequence.Append(transform.DOMove(<span class="keyword">new</span> Vector3(<span class="number">2</span>,<span class="number">0</span>,<span class="number">0</span>),<span class="number">2f</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">sequence.Join(transform.DOScale(Vector3.one, <span class="number">2f</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">sequence.PrependInterval(<span class="number">1</span>);       <span class="comment">//其次执行这个</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">sequence.Prepend(transform.DOMove(-Vector3.one,<span class="number">2f</span>));      <span class="comment">//首先执行这个</span></span></pre></td></tr></table></figure>
+
+<h3 id="5）回调函数"><a href="#5）回调函数" class="headerlink" title="5）回调函数"></a>5）回调函数</h3><p>1.插入</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//在第2秒的时候调用函数AppCallBack</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">sequence.InsertCallback(<span class="number">2</span>, AppCallBack);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">AppCallBack</span>(<span class="params"></span>)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    print(<span class="string">"InsertCallback"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>2.追加</p>
+<p>可以放在一个运动后面，在它执行完后便触发</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sequence.AppendCallback(AppCallBack);</span></pre></td></tr></table></figure>
+
+<p>3.预加载</p>
+<p>也可以放在预加载中</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">sequence.PrependCallback(AppCallBack);</span></pre></td></tr></table></figure>
+
+<p>4、回调函数的使用方法</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//在该动画执行完之后输出111111</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(Vector3.one, <span class="number">2f</span>).OnComplete(() =&gt; &#123; print(<span class="string">"111111"</span>); &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//在该动画被杀死之后完之后输出111111</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(Vector3.one, <span class="number">2f</span>).OnKill(() =&gt; &#123; print(<span class="string">"111111"</span>); &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//在该动画播放后之后输出111111（当动画被暂停后播放会再次执行）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(Vector3.one, <span class="number">2f</span>).OnPlay(() =&gt; &#123; print(<span class="string">"111111"</span>); &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//在该动画暂停后之后输出111111</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(Vector3.one, <span class="number">2f</span>).OnPause(() =&gt; &#123; print(<span class="string">"111111"</span>); &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//当该动画被反复执行的时候输出111111</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(Vector3.one, <span class="number">2f</span>).OnStepComplete(() =&gt; &#123; print(<span class="string">"111111"</span>); &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//当该动画最开始的时候输出111111（只执行一次）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(Vector3.one, <span class="number">2f</span>).OnStart(() =&gt; &#123; print(<span class="string">"111111"</span>); &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//当该动画更新时的时候输出111111</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(Vector3.one, <span class="number">2f</span>).OnUpdate(() =&gt; &#123; print(<span class="string">"111111"</span>); &#125;);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//当该动画重新播放的时候输出111111</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(Vector3.one, <span class="number">2f</span>).OnRewind(() =&gt; &#123; print(<span class="string">"111111"</span>); &#125;);</span></pre></td></tr></table></figure>
+
+
+
+<h2 id="六、参数设置方法"><a href="#六、参数设置方法" class="headerlink" title="六、参数设置方法"></a>六、参数设置方法</h2><h3 id="1）循环设置"><a href="#1）循环设置" class="headerlink" title="1）循环设置"></a>1）循环设置</h3><p>方法一</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//从起始点运动到(1,1,1)反复执行3次,LoopType.Restart是默认类型</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(Vector3.one, <span class="number">1f</span>).SetLoops(<span class="number">3</span>, LoopType.Restart);</span></pre></td></tr></table></figure>
+
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//从起始点运动到(1,1,1)再到起始点再到(1,1,1) 共运行3次</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(Vector3.one, <span class="number">1f</span>).SetLoops(<span class="number">3</span>, LoopType.Yoyo);</span></pre></td></tr></table></figure>
+
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//在每次运动完的基础上再去执行运动</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//从起始点(0,0,0)运动到(1,1,1)再到(2,2,2)再到(3,3,3)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(Vector3.one, <span class="number">1f</span>).SetLoops(<span class="number">3</span>, LoopType.Incremental);</span></pre></td></tr></table></figure>
+
+<p>SetLoops(-1)即为无限执行循环</p>
+<p>方法二</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">TweenParams tp = <span class="keyword">new</span> TweenParams();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">tp.SetLoops(<span class="number">-1</span>, LoopType.Incremental);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(Vector3.one, <span class="number">1f</span>).SetAs(tp);</span></pre></td></tr></table></figure>
+
+<h3 id="2-SetAutoKill、From"><a href="#2-SetAutoKill、From" class="headerlink" title="2)SetAutoKill、From"></a>2)SetAutoKill、From</h3><p>1.SetAutoKill</p>
+<p>当一个运动动画执行完后自动进行销毁</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(Vector3.one, <span class="number">1f</span>).SetAs(tp).SetAutoKill();</span></pre></td></tr></table></figure>
+
+<p>2.From</p>
+<p>从目标点运动到起始点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(Vector3.one, 1f).From();</span></pre></td></tr></table></figure>
+
+<p>若目标点和起始点重合</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//不移动</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(Vector3.one, <span class="number">1f</span>).From();</span></pre></td></tr></table></figure>
+
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//起始点+目标点，根据得到那个点移动回来</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//这里便是从(2,2,2)移动到(1,1,1)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(Vector3.one, <span class="number">1f</span>).From(<span class="literal">true</span>);</span></pre></td></tr></table></figure>
+
+<h3 id="3-延时"><a href="#3-延时" class="headerlink" title="3)延时"></a>3)延时</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//延时3秒后移动</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(Vector3.one, <span class="number">1f</span>).SetDelay(<span class="number">3</span>);</span></pre></td></tr></table></figure>
+
+<h3 id="4-基于速度运动"><a href="#4-基于速度运动" class="headerlink" title="4)基于速度运动"></a>4)基于速度运动</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//这里5f代表速度而不是时间</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(<span class="keyword">new</span> Vector3(<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>), <span class="number">5f</span>).SetSpeedBased();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//代表使用基于速度运动，5f代表速度</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(<span class="keyword">new</span> Vector3(<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>), <span class="number">5f</span>).SetSpeedBased(<span class="literal">true</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//代表不是使用基于速度运动，即5f为持续时间</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(<span class="keyword">new</span> Vector3(<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>), <span class="number">5f</span>).SetSpeedBased(<span class="literal">false</span>);</span></pre></td></tr></table></figure>
+
+<h3 id="5-ID设置"><a href="#5-ID设置" class="headerlink" title="5)ID设置"></a>5)ID设置</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置ID</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(Vector3.one, <span class="number">2f</span>).SetId(<span class="string">"Id03"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//可用DOTween.Play("ID")来调用</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">DOTween.Play(<span class="string">"ID03"</span>);</span></pre></td></tr></table></figure>
+
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//在该动画不用时可被回收</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(Vector3.one, <span class="number">2f</span>).SetRecyclable();</span></pre></td></tr></table></figure>
+
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//增量运动，在该点的基础上加上目标点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(Vector3.one, <span class="number">2f</span>).SetRelative();</span></pre></td></tr></table></figure>
+
+<h3 id="6）帧"><a href="#6）帧" class="headerlink" title="6）帧"></a>6）帧</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置为真的时候DOTween不受Time.Scale影响</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(Vector3.one, <span class="number">2f</span>).SetUpdate(UpdateType.Normal,<span class="literal">true</span>);</span></pre></td></tr></table></figure>
+
+<h2 id="七、运动曲线"><a href="#七、运动曲线" class="headerlink" title="七、运动曲线"></a>七、运动曲线</h2><p>1)unity自带的曲线设置</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//参数： 曲线形式，速度，强度(-1~1)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(Vector3.one, <span class="number">2f</span>).SetEase(Ease.Flash, <span class="number">10f</span>,<span class="number">0</span>);</span></pre></td></tr></table></figure>
+
+<p> 2）自定义曲线设置</p>
+<p>可在unity中自定义一个曲线来调用</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> AnimationCurve ac;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(Vector3.one, <span class="number">2f</span>).SetEase(ac);</span></pre></td></tr></table></figure>
+
+<p>3)函数自定义曲线</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(Vector3.one, <span class="number">2f</span>).SetEase(MyEaseFun);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">float</span> <span class="title">MyEaseFun</span>(<span class="params"><span class="keyword">float</span> time, <span class="keyword">float</span> duration, <span class="keyword">float</span> overshootOrAmplitude, <span class="keyword">float</span> period</span>)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> time / duration;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h2 id="八、动画控制函数"><a href="#八、动画控制函数" class="headerlink" title="八、动画控制函数"></a>八、动画控制函数</h2><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//动画重新播放</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">transform.DORestart();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//动画播放完直接回到开头（一闪而过）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">transform.DORwind();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//动画播放完直接回到开头（平滑的）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">transform.DOSmoothRwind();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//动画开始播放</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">transform.DOPlay();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//动画暂停播放</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">transform.DOPause();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//将当前动画销毁</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">transform.DOKill();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//动画翻转</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">transform.DOFlip();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//跳到某一秒</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">transform.DOGoto();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//动画从后往前播放</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">transform.DOPlayBackwards();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//动画从前往后播放</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">transform.DOPlayForward();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//当动画暂停时，执行就继续播放，播放时，执行就暂停</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//这是一个暂停/播放切换的开关</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">transform.DOTogglePause();</span></pre></td></tr></table></figure>
+
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//运动到(1,1,1)但在1s时执行transform.DORewind()瞬间回到原点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">async</span> <span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">	transform.DOMove(Vector3.one, <span class="number">2f</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">await</span> Task.Delay(TimeSpan.FromSeconds(<span class="number">1</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    transform.DORewind();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//若这里不开延迟不会动</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//物体运动到(1,1,1)又回来瞬间发生</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">async</span> <span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	transform.DOMove(Vector3.one, <span class="number">2f</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    transform.DOFlip();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//开启1s延迟则可看到动画效果</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">async</span> <span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>)</span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">	transform.DOMove(Vector3.one, <span class="number">2f</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">await</span> Task.Delay(TimeSpan.FromSeconds(<span class="number">1</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    transform.DOFlip();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//直接将动画跳转到1s的时候开始播放</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">transform.DOMove(Vector3.one, <span class="number">2f</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">transform.DOGoto(<span class="number">1</span>, <span class="literal">true</span>);</span></pre></td></tr></table></figure>
+
+<h2 id="九、类方法"><a href="#九、类方法" class="headerlink" title="九、类方法"></a>九、类方法</h2><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//找到所有正在暂停的动画</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list1 = DOTween.PausedTweens()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//找到所有正在运行的动画</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list2 = DOTween.PlayingTweens()</span></pre></td></tr></table></figure>
+
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//参数: ID值，是否正在播放</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//可以通过ID值去当前正在播放的动画中寻找</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">DOTween.TweensById(<span class="string">"ID"</span>,<span class="literal">true</span>)</span></pre></td></tr></table></figure>
+
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回满足条件的动画数组</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一个参数是播放动画的对象</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">DOTween.TweensByTarget(transform,<span class="literal">true</span>);</span></pre></td></tr></table></figure>
+
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//判断该动画是否在播放</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">DOTween.IsTweening(transform,<span class="literal">true</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//判断该对象是否有动画(暂停也算)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">DOTween.IsTweening(transform,<span class="literal">false</span>)</span></pre></td></tr></table></figure>
+
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//统计当前动画运动的个数(延迟动画也算做播放)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">DOTween.TotalPlayingTweens()</span></pre></td></tr></table></figure>
+
+<h2 id="十、动画执行时间的修改与控制"><a href="#十、动画执行时间的修改与控制" class="headerlink" title="十、动画执行时间的修改与控制"></a>十、动画执行时间的修改与控制</h2><p>1)控制时间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;通过修改tweener.fullPosition &#x3D; 3f使该动画在1s后直接播放完</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">var tweener &#x3D; transform.DOMove(Vector3.one, 3f);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">await Task.Delay(TimeSpan.FromSeconds(1));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">tweener.fullPosition &#x3D; 3f;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">Debug.Log(tweener.fullPosition);</span></pre></td></tr></table></figure>
+
+<p>2)通过延时输出循环次数</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> tweener = transform.DOMove(Vector3.one, <span class="number">1f</span>).SetLoops(<span class="number">3</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> Task.Delay(TimeSpan.FromSeconds(<span class="number">1</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">print(tweener.CompletedLoops());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> Task.Delay(TimeSpan.FromSeconds(<span class="number">1</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">print(tweener.CompletedLoops());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> Task.Delay(TimeSpan.FromSeconds(<span class="number">1</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">print(tweener.CompletedLoops());</span></pre></td></tr></table></figure>
+
+<p>3)获取动画的时间数据</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> tweener = transform.DOMove(Vector3.one, <span class="number">1f</span>).SetLoops(<span class="number">3</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取延时时间</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">tweener.Delay();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取当前动画的持续时间</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//参数：是否包含循环 </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//false 单次时间 true 循环的总时长</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">tweener.Duration();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//当前执行已完成的时间</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//参数：是否包含循环 </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">tweener.Elapsed();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//单次循环，无参</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//动画时间完成的百分比</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">tweener.ElapsedDirectionalPercentage();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//参数：是否包含循环 </span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//动画时间完成的百分比</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">tweener.ElapsedPercentage();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//动画是否在活动</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">tweener.IsActive();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//是否是反向动画</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">tweener.IsBackwards();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//动画是否完成</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">tweener.IsComplete();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//是否以初始化</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">tweener.IsInitialized();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//是否正在播放</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">tweener.IsPlaying();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回循环次数，  无限循环为Infinity</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">tweener.Loops();</span></pre></td></tr></table></figure>
+
+<h2 id="十一、利用协程"><a href="#十一、利用协程" class="headerlink" title="十一、利用协程"></a>十一、利用协程</h2><p>开始便输出111111，等到动画播放完毕，再输出222222</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Tween _twn;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">	_twn = transform.DOMove(Vector3.one, <span class="number">1f</span>).SetLoops(<span class="number">3</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">	StartCoroutine(waitFun1());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="function">IEnumerator <span class="title">waitFu1n</span>(<span class="params"></span>)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    print(<span class="string">"111111"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> _twn.WaitForCompletion();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    print(<span class="string">"222222"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<p>根据循环次数输出</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">_twn = transform.DOMove(Vector3.one, <span class="number">1f</span>).SetLoops(<span class="number">3</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">StartCoroutine(waitFun2());</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function">IEnumerator <span class="title">waitFun2</span>(<span class="params"></span>)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> _twn.WaitForElapsedLoops(<span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    print(<span class="string">"第一次循环结束"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> _twn.WaitForElapsedLoops(<span class="number">2</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    print(<span class="string">"第二次循环结束"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> _twn.WaitForElapsedLoops(<span class="number">3</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    print(<span class="string">"第三次循环结束"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr></table></figure>
+
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function">IEnumerator <span class="title">waitFun3</span>(<span class="params"></span>)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//当动画被杀死后执行</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> _twn.WaitForKill();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//当动画运动到1.5s的时候执行</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> _twn.WaitForPosition(<span class="number">1.5f</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//当动画重新开始的时候执行</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> _twn.WaitForRewind();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//当动画开始的时候执行</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">yield</span> <span class="keyword">return</span> _twn.WaitForStart()；</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<h2 id="十二、设置动画路径"><a href="#十二、设置动画路径" class="headerlink" title="十二、设置动画路径"></a>十二、设置动画路径</h2><p>需要导入<font color="red">using System.Linq;</font>使用Linq</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Transform[] listTrans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>)</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="function"></span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    Vector3[] listPosition = listTrans.Select(u =&gt; u.position).ToArray();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    transform.DOPath(listPosition,<span class="number">5f</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//参数：运动路径，运动时间，运动曲线的类型，路径模式，路径分辨率，路径曲线的颜色</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//pathMode: 路径模式（用于确定正确的LookAt方向）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//它内部定义了四种类型</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//Ignore：忽略此参数和设置的LookAt参数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//Full3D：在3d场景下，代表物体可以看向任何方向</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//TopDown2D：代表物体只能上下旋转，看向物体</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//Sidescroller2D：代表物体只能左右旋转看向物体</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//路径分辨率，代表路径点之间的曲线由多少个点构成，也就是点越多，曲线就越圆，此参数在直线路径类型下无效,默认为10</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">transform.DOPath(listPosition,<span class="number">5f</span>,PathType.Linear,PathMode.Full3D,<span class="number">10</span>,Color.red);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//始终看着(0,0,0)运动</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">transform.DOPath(listPosition,<span class="number">5f</span>,PathType.Linear,PathMode.Full3D,<span class="number">10</span>,Color.red).SetLookAt(<span class="keyword">new</span> Vector3(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置曲线为闭口</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">SetOptions(<span class="literal">true</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//始终看着正前方</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">SetLookAt(<span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//看的方向与运动路径呈一个角度（前提为闭口）</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">SetLookAt(<span class="number">0.5</span>);</span></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/03/19/GameObject.Find/" rel="next" title="GameObject.Find">
+                <i class="fa fa-chevron-left"></i> GameObject.Find
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/03/27/lua%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0(%E4%B8%80%EF%BC%89/" rel="prev" title="lua学习笔记(一）">
+                lua学习笔记(一） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">hhk</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Transform"><span class="nav-number">1.</span> <span class="nav-text">一、Transform</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Position"><span class="nav-number">1.1.</span> <span class="nav-text">1)Position</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Rotation"><span class="nav-number">1.2.</span> <span class="nav-text">2)Rotation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3）Scale"><span class="nav-number">1.3.</span> <span class="nav-text">3）Scale</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Punch"><span class="nav-number">1.4.</span> <span class="nav-text">4)Punch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-shake"><span class="nav-number">1.5.</span> <span class="nav-text">5)shake</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Blend"><span class="nav-number">1.6.</span> <span class="nav-text">6)Blend</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Material"><span class="nav-number">2.</span> <span class="nav-text">二、Material</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-改变材质颜色"><span class="nav-number">2.1.</span> <span class="nav-text">1)改变材质颜色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-改变材质透明度"><span class="nav-number">2.2.</span> <span class="nav-text">2)改变材质透明度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-设置材质渐变动画"><span class="nav-number">2.3.</span> <span class="nav-text">3)设置材质渐变动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Offset"><span class="nav-number">2.4.</span> <span class="nav-text">4)Offset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Vector和混合颜色的使用"><span class="nav-number">2.5.</span> <span class="nav-text">5)Vector和混合颜色的使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Camera"><span class="nav-number">3.</span> <span class="nav-text">三、Camera</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-设置相机宽高比、背景色、远近景控制"><span class="nav-number">3.1.</span> <span class="nav-text">1)设置相机宽高比、背景色、远近景控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#相机宽高比"><span class="nav-number">3.1.1.</span> <span class="nav-text">相机宽高比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#背景色"><span class="nav-number">3.1.2.</span> <span class="nav-text">背景色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#远近景控制"><span class="nav-number">3.1.3.</span> <span class="nav-text">远近景控制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-摄像机视域的控制"><span class="nav-number">3.2.</span> <span class="nav-text">2)摄像机视域的控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-分屏显示"><span class="nav-number">3.3.</span> <span class="nav-text">3)分屏显示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、Text"><span class="nav-number">4.</span> <span class="nav-text">四、Text</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1）打字机效果"><span class="nav-number">4.1.</span> <span class="nav-text">1）打字机效果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、运动序列"><span class="nav-number">5.</span> <span class="nav-text">五、运动序列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1）Append"><span class="nav-number">5.1.</span> <span class="nav-text">1）Append</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Insert"><span class="nav-number">5.2.</span> <span class="nav-text">2)Insert</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3）Join"><span class="nav-number">5.3.</span> <span class="nav-text">3）Join</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-预添加"><span class="nav-number">5.4.</span> <span class="nav-text">4)预添加</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5）回调函数"><span class="nav-number">5.5.</span> <span class="nav-text">5）回调函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、参数设置方法"><span class="nav-number">6.</span> <span class="nav-text">六、参数设置方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1）循环设置"><span class="nav-number">6.1.</span> <span class="nav-text">1）循环设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-SetAutoKill、From"><span class="nav-number">6.2.</span> <span class="nav-text">2)SetAutoKill、From</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-延时"><span class="nav-number">6.3.</span> <span class="nav-text">3)延时</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-基于速度运动"><span class="nav-number">6.4.</span> <span class="nav-text">4)基于速度运动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-ID设置"><span class="nav-number">6.5.</span> <span class="nav-text">5)ID设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6）帧"><span class="nav-number">6.6.</span> <span class="nav-text">6）帧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、运动曲线"><span class="nav-number">7.</span> <span class="nav-text">七、运动曲线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、动画控制函数"><span class="nav-number">8.</span> <span class="nav-text">八、动画控制函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#九、类方法"><span class="nav-number">9.</span> <span class="nav-text">九、类方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十、动画执行时间的修改与控制"><span class="nav-number">10.</span> <span class="nav-text">十、动画执行时间的修改与控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十一、利用协程"><span class="nav-number">11.</span> <span class="nav-text">十一、利用协程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十二、设置动画路径"><span class="nav-number">12.</span> <span class="nav-text">十二、设置动画路径</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hhk</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
